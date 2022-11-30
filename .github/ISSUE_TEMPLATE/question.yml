@@ -1,0 +1,15 @@
+name: 🤔 Question
+description: Need help
+title: "[Question] "
+labels: [question]
+assignees:
+  - austenstone
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Question
+      description: Please leave your question and provide as much relevant information as possible.
+      placeholder: What's up?
+    validations:
+      required: true

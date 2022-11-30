@@ -1,0 +1,19 @@
+name: ✨ Enhancement
+description: New feature or request
+title: "[Enhancement] "
+labels: [enhancement]
+assignees:
+  - adombence
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to improve this project!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: How can we improve?
+      description: Provide as much detail as possible.
+      placeholder: Let's do it! 🚀
+    validations:
+      required: true
