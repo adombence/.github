@@ -30,12 +30,12 @@ jobs:
     needs: [build, test, lint]
     uses: adombence/.github/.github/workflows/angular-pages-deploy.yml
 
-  docker:
-    name: 🐳 Docker
-    if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
-    needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-docker.yml
-    secrets: inherit
+  #docker:
+   # name: 🐳 Docker
+   # if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
+   # needs: [build, test, lint]
+   # uses: adombence/.github/.github/workflows/angular-docker.yml
+   # secrets: inherit
 
   release:
     name: 🚀 Release
