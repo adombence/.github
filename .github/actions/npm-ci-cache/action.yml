@@ -1,0 +1,21 @@
+name: NPM Cache Install
+description: NPM clean install with caching
+
+runs:
+  using: "composite"
+
+  steps:
+    - uses: actions/cache@v3
+      id: cache-nodemodules
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - run: npm ci
+      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      shell: bash
