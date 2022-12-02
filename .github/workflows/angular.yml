@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: ⚒️ Build
-    uses: adombence/.github/.github/workflows/angular-build.yml
+    uses: adombence/.github/.github/workflows/angular-build.yml@main
     with:
       out_dir: dist/${{ github.event.repository.name }}
   
@@ -16,29 +16,29 @@ jobs:
     strategy:
       matrix:
         runs-on: [ubuntu-latest, windows-latest, macos-latest]
-    uses: adombence/.github/.github/workflows/angular-test.yml
+    uses: adombence/.github/.github/workflows/angular-test.yml@main
     with:
       runs-on: ${{ matrix.runs-on }}
 
   lint:
     name: 🧹 Lint
     needs: [build]
-    uses: adombence/.github/.github/workflows/angular-lint.yml
+    uses: adombence/.github/.github/workflows/angular-lint.yml@main
 
   pages:
     name: 📄 Pages
     needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-pages-deploy.yml
+    uses: adombence/.github/.github/workflows/angular-pages-deploy.yml@main
 
   docker:
     name: 🐳 Docker
     if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
     needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-docker.yml
+    uses: adombence/.github/.github/workflows/angular-docker.yml@main
     secrets: inherit
 
   release:
     name: 🚀 Release
     if: startsWith(github.ref, 'refs/tags/')
     needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-release.yml
+    uses: adombence/.github/.github/workflows/angular-release.yml@main
