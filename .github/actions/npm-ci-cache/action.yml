@@ -16,6 +16,6 @@ runs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - run: npm ci
+    - run: npm ci --legacy-peer-deps
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
       shell: bash
