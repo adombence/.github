@@ -5,40 +5,41 @@ on:
 
 jobs:
   build:
-    name: ⚒️ Build
-    uses: adombence/.github/.github/workflows/angular-build.yml@main
+    name: ⚒️
+    uses: ./.github/workflows/angular-build.yml
     with:
       out_dir: dist/${{ github.event.repository.name }}
-  
+
   test:
-    name: 🧪 Test
+    name: 🧪
     needs: [build]
     strategy:
       matrix:
         runs-on: [ubuntu-latest, windows-latest, macos-latest]
-    uses: adombence/.github/.github/workflows/angular-test.yml@main
+    uses: ./.github/workflows/angular-test.yml
     with:
       runs-on: ${{ matrix.runs-on }}
 
   lint:
-    name: 🧹 Lint
+    name: 🧹
     needs: [build]
-    uses: adombence/.github/.github/workflows/angular-lint.yml@main
+    uses: ./.github/workflows/angular-lint.yml
 
   pages:
-    name: 📄 Pages
+    name: 📄
+    if: github.ref == 'refs/heads/main'
     needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-pages-deploy.yml@main
+    uses: ./.github/workflows/angular-pages-deploy.yml
 
-  #docker:
-   # name: 🐳 Docker
-   # if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
-   # needs: [build, test, lint]
-   # uses: adombence/.github/.github/workflows/angular-docker.yml
-   # secrets: inherit
+  docker:
+    name: 🐳
+    if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
+    needs: [build]
+    uses: ./.github/workflows/angular-docker.yml
+    secrets: inherit
 
   release:
-    name: 🚀 Release
+    name: 🚀
     if: startsWith(github.ref, 'refs/tags/')
     needs: [build, test, lint]
-    uses: adombence/.github/.github/workflows/angular-release.yml@main
+    uses: ./.github/workflows/angular-release.yml
