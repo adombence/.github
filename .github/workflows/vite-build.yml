@@ -28,4 +28,3 @@ jobs:
         with:
           name: dist
           path: ${{ inputs.out_dir }}
-          if-no-files-found: error
