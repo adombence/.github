@@ -1,0 +1,16 @@
+name: CI/CD
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: ⚒️
+    uses: ./.github/.github/workflows/vite-build.yml@main
+    with:
+      out_dir: dist/
+  
+  pages:
+     name: 📄
+     needs: [build]
+     uses: ./.github/.github/workflows/vite-pages-deploy.yml@main
